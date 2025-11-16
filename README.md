@@ -28,7 +28,7 @@ sudo tailscale up
 
 You must authenticate with your Tailscale account.
 
-3. Rename you local Tailscale Node:
+3. Optional: Rename you local Tailscale Node:
 
 ``` bash
 sudo tailscale set --hostname n8n-server
@@ -59,8 +59,20 @@ n8n_docker/
 A .env file must be created manually. Use .env.example as a template:
 
 ``` bash
-WEBHOOK_URL=https://n8n-server.tailXXXXXX.ts.net/
+WEBHOOK_URL=https://XXXX.tailXXXXXX.ts.net/
 ```
+If you rename your Tailscale node, the webhook base URL will also change. In that case, it will follow the format:
+
+``` bash
+https://<node-name>.tailXXXXXX.ts.net/
+```
+
+For example, if you rename the node as in step 3 of the Requirements, use:
+
+``` bash
+https://n8n-server.tailXXXXXX.ts.net/
+```
+This step is required because n8n uses webhook URLs to receive external requests from many nodes (such as HTTP Trigger, OAuth2 callbacks, Telegram, etc.). If the `WEBHOOK_URL` in the environment is incorrect, n8n will generate invalid callback URLs internally. Because Tailscale Funnel exposes your local n8n instance to the internet using a public URL, n8n must know the exact public address that Funnel assigns.
 
 ## How to use
 
