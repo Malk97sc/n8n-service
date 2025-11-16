@@ -26,6 +26,8 @@ sudo systemctl start tailscaled
 sudo tailscale up
 ```
 
+You must authenticate with your Tailscale account.
+
 3. Rename you local Tailscale Node:
 
 ``` bash
@@ -39,8 +41,6 @@ Run:
 ``` bash
 chmod +x n8n_start.sh n8n_stop.sh
 ```
-
-You must authenticate with your Tailscale account.
 
 ## Repository Structure 
 
