@@ -54,8 +54,7 @@ n8n_docker/
 
 ## Environment File
 
-A .env file must be created manually (the real file is not included in the repository).
-Use .env.example as a template:
+A .env file must be created manually. Use .env.example as a template:
 
 ``` bash
 WEBHOOK_URL=https://n8n-server.tailXXXXXX.ts.net/
