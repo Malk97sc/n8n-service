@@ -1,5 +1,7 @@
 # n8n Funnel Deployment
 
+This repository provides a modular setup to run n8n inside Docker and expose it securely over the internet using Tailscale Funnel, without requiring any domain. Everything is activated and deactivated manually through scripts to keep full user control.
+
 ## Requirements
 
 Before using this project, ensure the following are installed on your system:
