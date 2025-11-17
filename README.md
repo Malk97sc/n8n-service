@@ -46,7 +46,7 @@ chmod +x n8n_start.sh n8n_stop.sh
 
 ```bash
 n8n_docker/
-│
+├─ n8n_data #You need to create
 ├─ docker-compose.yml
 ├─ n8n_start.sh
 ├─ n8n_stop.sh
