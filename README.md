@@ -11,7 +11,7 @@ Before using this project, ensure the following are installed on your system:
 Install Docker by following the official documentation:
 [Docker](https://docs.docker.com/engine/install/)
 
-2. Tailsacle Client
+2. Tailscale Client
 
 Tailscale must be installed to enable secure tunnel access through Funnel.
 
@@ -34,12 +34,10 @@ You must authenticate with your Tailscale account.
 sudo tailscale set --hostname n8n-server
 ```
 
-4. Script Permissions:
-
-Run: 
+4. Disable Tailscale on system startup:
 
 ``` bash
-chmod +x n8n_start.sh n8n_stop.sh
+sudo systemctl disable tailscaled
 ```
 
 ## Repository Structure 
@@ -54,6 +52,25 @@ n8n_docker/
 └─ README.md
 ```
 
+## How to find your Funnel URL
+
+To view the public URL assigned by Tailscale Funnel, run:
+
+``` bash
+sudo tailscale funnel 5678
+```
+
+Output: 
+
+```bash
+Available on the internet:
+
+https://n8n-server.tailXXX.ts.net/
+|-- proxy http://XX.X.X.X:5678
+```
+
+Use the https URL as the value for WEBHOOK_URL.
+
 ## Environment File
 
 A .env file must be created manually. Use .env.example as a template:
@@ -61,6 +78,7 @@ A .env file must be created manually. Use .env.example as a template:
 ``` bash
 WEBHOOK_URL=https://XXXX.tailXXXXXX.ts.net/
 ```
+
 If you rename your Tailscale node, the webhook base URL will also change. In that case, it will follow the format:
 
 ``` bash
@@ -72,6 +90,7 @@ For example, if you rename the node as in step 3 of the Requirements, use:
 ``` bash
 https://n8n-server.tailXXXXXX.ts.net/
 ```
+
 This step is required because n8n uses webhook URLs to receive external requests from many nodes (such as HTTP Trigger, OAuth2 callbacks, Telegram, etc.). If the `WEBHOOK_URL` in the environment is incorrect, n8n will generate invalid callback URLs internally. Because Tailscale Funnel exposes your local n8n instance to the internet using a public URL, n8n must know the exact public address that Funnel assigns.
 
 ## How to use
@@ -82,7 +101,15 @@ This step is required because n8n uses webhook URLs to receive external requests
 mkdir n8n_data
 ```
 
-2. Start n8n with Tailscale Funnel
+2. Script Permissions:
+
+Run: 
+
+``` bash
+chmod +x n8n_start.sh n8n_stop.sh
+```
+
+3. Start n8n with Tailscale Funnel
 
 ``` bash
 ./n8n_start.sh
@@ -93,7 +120,7 @@ After launching, the script will print the public Tailscale Funnel URL, such as:
 https://XXXXXXXXX.ts.net/
 ```
 
-3. Stop Everything
+4. Stop Everything
 
 ``` bash
 ./n8n_stop.sh
