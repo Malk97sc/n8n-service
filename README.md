@@ -2,6 +2,18 @@
 
 This repository provides a modular setup to run n8n inside Docker and expose it securely over the internet using Tailscale Funnel, without requiring any domain. Everything is activated and deactivated manually through scripts to keep full user control.
 
+## Repository Structure 
+
+```bash
+n8n_docker/
+├─ n8n_data #You need to create
+├─ docker-compose.yml
+├─ n8n_start.sh
+├─ n8n_stop.sh
+├─ .env #You need to create
+└─ README.md
+```
+
 ## Requirements
 
 Before using this project, ensure the following are installed on your system:
@@ -38,18 +50,6 @@ sudo tailscale set --hostname n8n-server
 
 ``` bash
 sudo systemctl disable tailscaled
-```
-
-## Repository Structure 
-
-```bash
-n8n_docker/
-├─ n8n_data #You need to create
-├─ docker-compose.yml
-├─ n8n_start.sh
-├─ n8n_stop.sh
-├─ .env #You need to create
-└─ README.md
 ```
 
 ## How to find your Funnel URL
